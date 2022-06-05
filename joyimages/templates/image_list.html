@@ -1,0 +1,45 @@
+
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        {% if title %} 
+        <title>{{title}}</title>
+        {% endif %} 
+
+        {% block styles %} 
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        {% endblock %} 
+    </head>
+    <body>
+
+        {% include 'navbar.html' %}
+
+        {% block content %} 
+
+        <div class="container">
+        <div class="row">
+            {% for image in image_list %}
+            <!-- <ul> -->
+            <div class="col-md-4">
+            <div class="card my-2">
+                <a href="{% url 'image-detail' image.id %}"><img src="{{image.photo.url}}" class="img-thumbnail" alt=""></a>
+            </div>
+            </div>
+        <!-- </ul> -->
+            {% endfor %}
+        </div>
+        </div>
+
+        {% endblock %}
+
+        {% block scripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            {% bootstrap_javascript %}
+        {% endblock %}
+    </body>
+</html>
