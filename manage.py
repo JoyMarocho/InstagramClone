@@ -2,9 +2,13 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from dotenv import load_dotenv
 
 
 def main():
+    """Activate dotenv entries"""
+    load_dotenv(override=True)
+
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'joyinsta.settings')
     try:
