@@ -18,4 +18,7 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
 
-
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['user', 'body']
