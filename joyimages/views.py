@@ -57,7 +57,7 @@ def login_user(request):
         login(request, user)
         messages.info(request, f"You are now logged in as {username}.")
         return redirect('index')
-        else:
+        elseif:
         messages.error(request, f'Invalid Username or password')
     else:
             messages.error(request, f'Invalid username or password')
@@ -68,3 +68,56 @@ def logout_user(request):
     logout(request)
     messages.info(request, f'You have successfully logged out.')
     return redirect('index')
+
+# @login_required(login_url='/login')
+# def new_image(request):
+#   current_user = request.user
+#   if request.method == 'POST':
+#     form = UploadImageForm(request.POST, request.FILES)
+#     if form.is_valid():
+#       image = form.save(commit=False)
+#       image.username = current_user
+#       image.save()
+#     return redirect('index')
+#   else:
+#     form = UploadImageForm
+#   return render(request, 'new_image.html', {"image_form": form})
+
+
+# class CommentCreateView(LoginRequiredMixin,CreateView):
+#   model = Comment
+#   fields = ['comment']
+#   template_name = 'phiimages/index.html'
+
+
+#   def form_valid(self, form):
+#     form.instance.user = self.request.user
+#     return super().form_valid(form)
+
+class ImageCreateView(LoginRequiredMixin,CreateView):
+    form_class = UploadImageForm
+    template_name = 'new_image.html'
+
+def form_valid(self, form):
+    form.instance.username = self.request.user
+    return super().form_valid(form)
+
+
+class ImageDetailView(DetailView):
+    model = Image
+    template_name = 'image_detail.html'
+
+
+class ImageListView(ListView):
+    model = Image
+    template_name = 'image_list.html'
+
+class CommentCreateView(LoginRequiredMixin,CreateView):
+    form_class = CommentForm
+    template_name = 'new_comment.html'
+
+def form_valid(self, form):
+    form.instance.username = self.request.user
+    return super().form_valid(form)
+
+
