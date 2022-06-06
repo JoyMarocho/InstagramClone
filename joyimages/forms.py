@@ -22,3 +22,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['user', 'body']
+
+
+class UploadImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        exclude = ['comments', 'likes', 'profile',]
