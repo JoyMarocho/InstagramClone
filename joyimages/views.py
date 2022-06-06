@@ -15,22 +15,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 @login_required(login_url='/login')
 def index(request):
     images = Image.objects.all()
-    # comments = image.comments.filter(active=True)
-    # new_comment = None
-    # if request.method == 'POST':
-    #   comment_form = CommentForm(data=request.POST)
-    #   if comment_form.is_valid():
+    comments = image.comments.filter(active=True)
+    new_comment = None
+    if request.method == 'POST':
+            comment_form = CommentForm(data=request.POST)
+    if comment_form.is_valid():
 
-    #     #Create Comment object but fail to save to the database yet
-    #     new_comment = comment_form.save(commit=False)
+    #Create Comment object but fail to save to the database yet
+            new_comment = comment_form.save(commit=False)
 
-    #     #Assign current post to comment
-    #     new_comment.image = image
+    #Assign current post to comment
+            new_comment.image = image
 
-    #     #Save comment to database
-    #     new_comment.save()
-    #   else:
-    #     comment_form = CommentForm
+    #Save comment to database
+            new_comment.save()
+    else:
+            comment_form = CommentForm
     return render(request, 'index.html', {"images":images})
 
 def register_new_user(request):
@@ -54,46 +54,44 @@ def login_user(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username,password=password)
 
+    form = AuthenticationForm()
     if user is not None:
         login(request, user)
         messages.info(request, f"You are now logged in as {username}.")
         return redirect('index')
-    # elif :
-    #     messages.error(request, f'Invalid Username or password')
-    else:
-            messages.error(request, f'Invalid username or password')
-    form = AuthenticationForm()
-    return render(request, 'registration/login.html', {"login_form": form})
+    else :
+        messages.error(request, f'Invalid Username or password')
+        return render(request, 'registration/login.html', {"login_form": form})
 
 def logout_user(request):
     logout(request)
     messages.info(request, f'You have successfully logged out.')
     return redirect('index')
 
-# @login_required(login_url='/login')
-# def new_image(request):
-#   current_user = request.user
-#   if request.method == 'POST':
-#     form = UploadImageForm(request.POST, request.FILES)
-#     if form.is_valid():
-#       image = form.save(commit=False)
-#       image.username = current_user
-#       image.save()
-#     return redirect('index')
-#   else:
-#     form = UploadImageForm
-#   return render(request, 'new_image.html', {"image_form": form})
+@login_required(login_url='/login')
+def new_image(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = UploadImageForm(request.POST, request.FILES)
+    if form.is_valid():
+        image = form.save(commit=False)
+        image.username = current_user
+        image.save()
+        return redirect('index')
+    else:
+        form = UploadImageForm
+        return render(request, 'new_image.html', {"image_form": form})
 
 
-# class CommentCreateView(LoginRequiredMixin,CreateView):
-#   model = Comment
-#   fields = ['comment']
-#   template_name = 'phiimages/index.html'
+class CommentCreateView(LoginRequiredMixin,CreateView):
+    model = Comment
+    fields = ['comment']
+    template_name = 'joyimages/index.html'
 
 
-#   def form_valid(self, form):
-#     form.instance.user = self.request.user
-#     return super().form_valid(form)
+def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
 
 class ImageCreateView(LoginRequiredMixin,CreateView):
     form_class = UploadImageForm

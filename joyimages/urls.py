@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'new/image/$', ImageCreateView.as_view(), name='image-add'),
     url(r'(?P<pk>\d+)', ImageDetailView.as_view(), name='image-detail'),
     url(r'', ImageListView.as_view(), name='image-list'),
-    #url(r'comment/add', CommentCreateView.as_view(), name='author-add'),
+    url(r'comment/add', CommentCreateView.as_view(), name='author-add'),
     ]
 
 if settings.DEBUG:

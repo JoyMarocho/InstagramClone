@@ -102,6 +102,14 @@ DATABASES = {
     }
 }
 
+#cloudinary configurations
+
+# cloudinary.config( 
+#     cloud_name = 'marocho',
+#     api_key = '188969527952778', 
+#     api_secret = 'E0KbLWpJXr-TCLV687wFUlmI4J4'
+# )       
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
