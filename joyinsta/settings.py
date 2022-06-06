@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'joyinsta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'',
+        'NAME':'insta',
         'USER' : 'bigbaby',
         'PASSWORD':'babyjade',
         'HOST':'127.0.0.1',

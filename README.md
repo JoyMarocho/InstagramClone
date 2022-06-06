@@ -39,9 +39,9 @@ As a user of the application you will be able to:
 
         pipenv install -r requirements.txt
 
-4. On your terminal,Create database gallery using the command below.
+4. On your terminal,Create database insta using the command below.
 
-        CREATE DATABASE gallery;
+        CREATE DATABASE insta;
 
 5. Migrate the database using the command below
 
@@ -56,7 +56,7 @@ As a user of the application you will be able to:
 ## Running the tests
 Use the command given below to run automated tests.
 
-        make test gallery
+        make test insta
 
 
 ## Technologies Used
