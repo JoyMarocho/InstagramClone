@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'tinymce',
     'joyimages.apps.JoyimagesConfig',
     'cloudinary',
     'bootstrap5',
