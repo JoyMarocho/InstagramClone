@@ -33,7 +33,7 @@ def index(request):
     #     comment_form = CommentForm
     return render(request, 'index.html', {"images":images})
 
-    def register_new_user(request):
+def register_new_user(request):
         if request.method == "POST":
             form = NewUserForm(request.POST)
         if form.is_valid():
@@ -42,23 +42,24 @@ def index(request):
         messages.success(request, 'Registration Successful.')
         return redirect('index')
         messages.error(request, 'Unsuccessful registration. Invalid information.')
-    form = NewUserForm()
-    return render(request, 'registration/registration_form.html', {"registration_form": form} )
+        form = NewUserForm()
+        return render(request, 'registration/registration_form.html', {"registration_form": form} )
 
 
 def login_user(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-    if form.is_valid():
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password')
-        user = authenticate(username=username,password=password)
+    form = AuthenticationForm(request, data=request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username,password=password)
+
     if user is not None:
         login(request, user)
         messages.info(request, f"You are now logged in as {username}.")
         return redirect('index')
-        elseif:
-        messages.error(request, f'Invalid Username or password')
+    # elif :
+    #     messages.error(request, f'Invalid Username or password')
     else:
             messages.error(request, f'Invalid username or password')
     form = AuthenticationForm()

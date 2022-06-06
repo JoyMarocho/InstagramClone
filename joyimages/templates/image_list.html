@@ -21,7 +21,7 @@
 
         {% block content %} 
 
-        <div class="container">
+        {% comment %} <div class="container">
         <div class="row">
             {% for image in image_list %}
             <!-- <ul> -->
@@ -33,7 +33,77 @@
         <!-- </ul> -->
             {% endfor %}
         </div>
-        </div>
+        </div> {% endcomment %}
+
+            <div class="container">
+                <div class="row">
+                
+                <!-- <ul> -->
+                <div class="col-md-4">
+                    <div class="card my-2">
+                    <a href="/1"><img src="https://res.cloudinary.com/marocho/image/upload/v1654523291/cld-sample-3.jpg" class="img-thumbnail" alt=""></a>
+                    </div>
+                </div>
+                <!-- </ul> -->
+                
+                <!-- <ul> -->
+                <div class="col-md-4">
+                    <div class="card my-2">
+                    <a href="/2"><img src="https://res.cloudinary.com/marocho/image/upload/v1654523292/cld-sample-4.jpg" class="img-thumbnail" alt=""></a>
+                    </div>
+                </div>
+                <!-- </ul> -->
+                
+                <!-- <ul> -->
+                <div class="col-md-4">
+                    <div class="card my-2">
+                    <a href="/3"><img src="https://res.cloudinary.com/marocho/image/upload/v1654523270/samples/food/fish-vegetables.jpg" class="img-thumbnail" alt=""></a>
+                    </div>
+                </div>
+                <!-- </ul> -->
+                
+                <!-- <ul> -->
+                <div class="col-md-4">
+                    <div class="card my-2">
+                    <a href="/4"><img src="https://res.cloudinary.com/marocho/image/upload/v1654523272/samples/bike.jpg" class="img-thumbnail" alt=""></a>
+                    </div>
+                </div>
+                <!-- </ul> -->
+                
+                <!-- <ul> -->
+                <div class="col-md-4">
+                    <div class="card my-2">
+                    <a href="/5"><img src="https://res.cloudinary.com/marocho/image/upload/v1654523291/cld-sample.jpg" class="img-thumbnail" alt=""></a>
+                    </div>
+                </div>
+                <!-- </ul> -->
+                
+                <!-- <ul> -->
+                <div class="col-md-4">
+                    <div class="card my-2">
+                    <a href="/6"><img src="https://res.cloudinary.com/marocho/image/upload/v1654523273/samples/people/jazz.jpg" class="img-thumbnail" alt=""></a>
+                    </div>
+                </div>
+                <!-- </ul> -->
+                
+                <!-- <ul> -->
+                <div class="col-md-4">
+                    <div class="card my-2">
+                    <a href="/7"><img src="https://res.cloudinary.com/marocho/image/upload/v1654523279/samples/landscapes/nature-mountains.jpg" class="img-thumbnail" alt=""></a>
+                    </div>
+                </div>
+                <!-- </ul> -->
+                
+                <!-- <ul> -->
+                <div class="col-md-4">
+                    <div class="card my-2">
+                    <a href="/8"><img src="https://res.cloudinary.com/marocho/image/upload/v1654523268/samples/ecommerce/analog-classic.jpg" class="img-thumbnail" alt=""></a>
+                    </div>
+                </div>
+                <!-- </ul> -->
+                
+                </div>
+            </div>
 
         {% endblock %}
 
