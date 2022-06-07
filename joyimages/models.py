@@ -47,7 +47,7 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete()
-
+    
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

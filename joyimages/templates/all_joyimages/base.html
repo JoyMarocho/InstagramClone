@@ -16,9 +16,9 @@
         {% endblock %}
     </head>
     <body>
-        {% include 'navbar.html' %}
+        {% comment %} {% include 'navbar.html' %} {% endcomment %}
 
-        
+        {% include 'registration/login.html'%}
 
         {% block content %} <h2 class="text-center"> Your Images Here: {% endblock %} </h2>
 

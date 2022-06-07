@@ -17,11 +17,13 @@
     </head>
     <body>
 
-        {% include 'navbar.html' %}
+        {% include 'registration/login.html' %}
+
 
         {% block content %} 
 
-        {% comment %} <div class="container">
+    
+        <div class="container">
         <div class="row">
             {% for image in image_list %}
             <!-- <ul> -->
@@ -33,7 +35,7 @@
         <!-- </ul> -->
             {% endfor %}
         </div>
-        </div> {% endcomment %}
+        </div>
 
             <div class="container">
                 <div class="row">

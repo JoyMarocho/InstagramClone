@@ -5,17 +5,17 @@
     <div class="container">
     <div class="row">
         {% for image in images %}
-        <div class="col-md-4">
+        <div class="col-md-4"> {% endcomment %}
         <div class="card my-2">
             <img src="{{image.photo.url}}" class="img-thumbnail" alt="">
-        </div>
-        <!-- <div class="card-body bg-dark">
+        </div> {% endcomment %}
+        <div class="card-body bg-dark">
             <h5 class="text-center text-light">{{image.name}}</h5>
             <p class="text-center text-light">{{image.caption}}</p>
         </div>
         <div class="card-footer bg-secondary">
             <p class="text-center text-dark">{{image.comments}}</p>
-        </div> -->
+        </div> 
         </div>
         {% endfor %}
     </div>
