@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import Image,Comment,Profile
 
 class NewUserForm(UserCreationForm):
-    email = forms.EmailField()
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
     class Meta:
         model = User
@@ -17,11 +17,25 @@ class NewUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+class UpdateUserForm(forms.ModelForm):
+        email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+
+        class Meta:
+            model = User
+            fields = ('username', 'email')
 
 class CommentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['comment'].widget = forms.TextInput()
+        self.fields['comment'].widget.attrs['placeholder'] = 'Add a comment...'
+
     class Meta:
         model = Comment
-        fields = ['user', 'body']
+        fields = ('comment',)
+
+
 
 
 class UploadImageForm(forms.ModelForm):
@@ -31,6 +45,14 @@ class UploadImageForm(forms.ModelForm):
 
 
 class ProfileEditForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        exclude = ['',]
+    
+        class Meta:
+            model = Profile
+            fields = ['name', 'location', 'profile_picture', 'bio']
+
+
+class PostForm(forms.ModelForm):
+    
+        class Meta:
+            model = Post
+            fields = ('image', 'caption')

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Image,Profile,Comment
+from .models import Image,Profile,Comment,Post,Follow
 
 # Register your models here.
 
@@ -21,3 +21,6 @@ def approve_comments(self, request, queryset):
 admin.site.register(Profile)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Post)
+admin.site.register(Follow)
+
