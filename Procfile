@@ -1,1 +1,1 @@
-web: gunicorn joyinsta.wsgi
+web: gunicorn joyinsta.wsgi 
