@@ -8,7 +8,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand text-dark" style="margin-left:24%; font-size:30px" href="{% url 'image-list' %}"><img class="logo" height=25px src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png" alt="Instagram"></a>
+            {% comment %} <a class="navbar-brand text-dark" style="margin-left:24%; font-size:30px" href="{% url 'image_list' %}"><img class="logo" height=25px src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png" alt="Instagram"></a> {% endcomment %}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,13 +23,13 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="fas fa-home" style="margin-left:200%; font-size:15px" aria-current="page" href="{% url 'image-list' %}"></a>
+                {% comment %} <a class="fas fa-home" style="margin-left:200%; font-size:15px" aria-current="page" href="{% url 'image-list' %}"></a> {% endcomment %}
                 </li>
             </ul>
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="far fa-plus-square" style="margin-left:-400%; font-size:15px" aria-current="page" href="{% url 'image-add' %}"></a>
+                {% comment %} <a class="far fa-plus-square" style="margin-left:-400%; font-size:15px" aria-current="page" href="{% url 'image-add' %}"></a> {% endcomment %}
                 </li>
             </ul>
 

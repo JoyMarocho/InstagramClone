@@ -3,16 +3,18 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .forms import NewUserForm,CommentForm,UploadImageForm,ProfileEditForm,UpdateUserForm
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.views import LoginView  
 from .models import Image, Comment, Profile, Follow
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.views.generic import RedirectView
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib import messages
-from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.views.generic.edit import CreateView,FormView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -36,61 +38,41 @@ def index(request):
 
     }
     return render(request, 'index.html', params)
+
+class RegisterPage(FormView):
+    template_name='registration/registration_form.html'
+    form_class=UserCreationForm
+    redirect_authenticated_user=True
+    success_url=reverse_lazy('login')
+
+
+    def form_valid(self, form ) :
+        user=form.save()
+        # if user is not None:{
+        #     login(self.request,user)
+        # }
+        return super(RegisterPage,self).form_valid(form)
+
+        # an authenticated user should not access the register page
+
+    def get(self,*args,**kwargs):
+            if self.request.user.is_authenticated:
+                return redirect('index')
+            return super(RegisterPage,self).get(*args,**kwargs)  
+
+
+
+class CustomLoginView(LoginView):
+    template_name='registration/login.html'
+    fields='__all__'
+    redirect_authenticated_user=True
     
-    
-    
-    # comments = image.comments.filter(active=True)
-    # new_comment = None
-    # if request.method == 'POST':
-    #         # comment_form = CommentForm(data=request.POST)
-    # if comment_form.is_valid():
-
-    # #Create Comment object but fail to save to the database yet
-    #         new_comment = comment_form.save(commit=False)
-
-    # #Assign current post to comment
-    #         new_comment.image = image
-
-#     #Save comment to database
-#             new_comment.save()
-#     else:
-#             comment_form = CommentForm
-    # return render(request, 'index.html', {"images":images})
-
-def register_new_user(request):
-        form = NewUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('index')
-        else:
-            form = NewUserForm()
-        return render(request, 'registration/registration_form.html', {'form': form})
+# ONCE LOGGED IN THE USER WILL BE AUTOMATICALLY BE DIRECTED TO THE HOMEPAGE
+    def get_success_url(self):
+        # return render (request, 'index')
+        return reverse_lazy('image_list')
 
 
-        # if request.method == "POST" and form.is_valid():
-        #     user = form.save()
-        # login(request, user)
-        # messages.success(request, 'Registration Successful.')
-        # return redirect('index')
-        # messages.error(request, 'Unsuccessful registration. Invalid information.')
-        # form = NewUserForm()
-        # return render(request, 'registration/registration_form.html', {"registration_form": form} )
-
-
-
-# @login_required(login_url='login')
-# def my_login_required(function):
-#     def wrapper(request, *args, **kw):
-#         user=request.user  
-#         if not (user.id and request.session.get('code_success')):
-#             return HttpResponseRedirect('/splash/')
-#         else:
-#             return function(request, *args, **kw)
-#     return wrapper
 
 @login_required(login_url='login')
 def profile(request, username):
@@ -111,25 +93,6 @@ def profile(request, username):
         'images': images,
     }
     return render(request, 'index.html', params)
-
-
-# def login_user(request):
-#     form = AuthenticationForm(request, data=request.POST is None) 
-#     if request.method == 'POST' and form.is_valid():
-        
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(username=username,password=password)
-#             return render(request, 'registration/login.html', {"login_form": form})
-
-#     form = AuthenticationForm()
-#     if user is not None:
-#         login(request.method != 'POST', user)
-#         messages.info(request, f"You are now logged in as {username}.")
-#         return redirect('index')
-#     else :
-#         messages.error(request, f'Invalid Username or password')
-#         return render(request, 'registration/login.html', {"login_form": form})
 
 @login_required(login_url='login')
 def user_profile(request, username):
@@ -284,3 +247,85 @@ def form_valid(self, form):
     return super().form_valid(form)
 
 
+###### index ########
+
+    # comments = image.comments.filter(active=True)
+    # new_comment = None
+    # if request.method == 'POST':
+    #         # comment_form = CommentForm(data=request.POST)
+    # if comment_form.is_valid():
+
+    # #Create Comment object but fail to save to the database yet
+    #         new_comment = comment_form.save(commit=False)
+
+    # #Assign current post to comment
+    #         new_comment.image = image
+
+#     #Save comment to database
+#             new_comment.save()
+#     else:
+#             comment_form = CommentForm
+    # return render(request, 'index.html', {"images":images})
+
+###### end index ########
+
+
+###### login ########
+
+# @login_required(login_url='login')
+# def my_login_required(function):
+#     def wrapper(request, *args, **kw):
+#         user=request.user  
+#         if not (user.id and request.session.get('code_success')):
+#             return HttpResponseRedirect('/splash/')
+#         else:
+#             return function(request, *args, **kw)
+#     return wrapper
+
+
+# def login_user(request):
+#     form = AuthenticationForm(request, data=request.POST is None) 
+#     if request.method == 'POST' and form.is_valid():
+        
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(username=username,password=password)
+#             return render(request, 'registration/login.html', {"login_form": form})
+
+#     form = AuthenticationForm()
+#     if user is not None:
+#         login(request.method != 'POST', user)
+#         messages.info(request, f"You are now logged in as {username}.")
+#         return redirect('index')
+#     else :
+#         messages.error(request, f'Invalid Username or password')
+#         return render(request, 'registration/login.html', {"login_form": form})
+
+###### end login process ########
+
+
+###### Registration ########
+# def register_new_user(request):
+#         form = NewUserForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('username')
+#             raw_password = form.cleaned_data.get('password1')
+#             user = authenticate(username=username, password=raw_password)
+#             login(request, user)
+#             return redirect('index')
+#         else:
+#             form = NewUserForm()
+#         return render(request, 'registration/registration_form.html', {'form': form})
+
+
+        # if request.method == "POST" and form.is_valid():
+        #     user = form.save()
+        # login(request, user)
+        # messages.success(request, 'Registration Successful.')
+        # return redirect('index')
+        # messages.error(request, 'Unsuccessful registration. Invalid information.')
+        # form = NewUserForm()
+        # return render(request, 'registration/registration_form.html', {"registration_form": form} )
+
+###### End Registration ########
