@@ -34,10 +34,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment',)
-
-
-
-
+        
 class UploadImageForm(forms.ModelForm):
     class Meta:
         model = Image
@@ -51,8 +48,8 @@ class ProfileEditForm(forms.ModelForm):
             fields = ['name', 'location', 'profile_picture', 'bio']
 
 
-class PostForm(forms.ModelForm):
+# class PostForm(forms.ModelForm):
     
-        class Meta:
-            model = Post
-            fields = ('image', 'caption')
+#         class Meta:
+#             model = Post
+#             fields = ('image', 'caption')

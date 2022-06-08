@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
-from .forms import NewUserForm,CommentForm,UploadImageForm,ProfileEditForm,UpdateUserForm,PostForm
+from .forms import NewUserForm,CommentForm,UploadImageForm,ProfileEditForm,UpdateUserForm
 from django.contrib.auth import login, authenticate, logout
-from .models import Image, Post, Comment, Profile, Follow
+from .models import Image, Comment, Profile, Follow
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.views.generic import RedirectView
@@ -256,31 +256,31 @@ def follow(request, to_follow):
         return redirect('user_profile', user_profile3.user.username)
 
 
-# def form_valid(self, form):
-#     form.instance.user = self.request.user
-#     return super().form_valid(form)
+def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
 
-# class ImageCreateView(LoginRequiredMixin,CreateView):
-#     form_class = UploadImageForm
-#     template_name = 'new_image.html'
+class ImageCreateView(LoginRequiredMixin,CreateView):
+    form_class = UploadImageForm
+    template_name = 'new_image.html'
 
-# def form_valid(self, form):
-#     form.instance.username = self.request.user
-#     return super().form_valid(form)
-
-
-# class ImageDetailView(DetailView):
-#     model = Image
-#     template_name = 'image_detail.html'
+def form_valid(self, form):
+    form.instance.username = self.request.user
+    return super().form_valid(form)
 
 
-# class ImageListView(ListView):
-#     model = Image
-#     template_name = 'image_list.html'
+class ImageDetailView(DetailView):
+    model = Image
+    template_name = 'image_detail.html'
 
 
-# def form_valid(self, form):
-#     form.instance.username = self.request.user
-#     return super().form_valid(form)
+class ImageListView(ListView):
+    model = Image
+    template_name = 'image_list.html'
+
+
+def form_valid(self, form):
+    form.instance.username = self.request.user
+    return super().form_valid(form)
 
 

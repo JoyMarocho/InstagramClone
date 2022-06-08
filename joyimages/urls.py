@@ -2,6 +2,7 @@ from django.urls import re_path as url, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+# from joyimages.views import PostLikeToggle
 from .views import ImageCreateView,ImageDetailView,ImageListView
 
 
@@ -16,7 +17,7 @@ urlpatterns = [
     url(r'', views.login_required, name='login'),
     # url(r'comment/add', CommentCreateView.as_view(), name='author-add'),
     url('post/<id>', views.post_comment, name='comment'),
-    url('post/<id>/like', PostLikeToggle.as_view(), name='liked'),
+    # url('post/<id>/like', PostLikeToggle.as_view(), name='liked'),
     url('like', views.like_post, name='like_post'),
     url('search/', views.search_profile, name='search'),
     url('unfollow/<to_unfollow>', views.unfollow, name='unfollow'),
