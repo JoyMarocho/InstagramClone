@@ -70,7 +70,7 @@ class CustomLoginView(LoginView):
 # ONCE LOGGED IN THE USER WILL BE AUTOMATICALLY BE DIRECTED TO THE HOMEPAGE
     def get_success_url(self):
         # return render (request, 'index')
-        return reverse_lazy('image_list')
+        return reverse_lazy('index')
 
 
 

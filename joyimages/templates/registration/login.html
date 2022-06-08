@@ -14,7 +14,7 @@
                     <img src="{% static 'images/insta5.png' %}" alt="" width="40%" class="D-block mx-auto">
                 </div>
                 <div class="card-body mb-3 mr-3 ml-3">
-                    <form action="../image_list" method="post" novalidate>
+                    <form action="/accounts/login" method="post" novalidate>
                         {% csrf_token%}
                         {{ form|crispy}}
                         <button type="submit" class="btn btn-primary btn-sm D-block mx-auto"> Log In </button>
@@ -25,7 +25,7 @@
             <div class="card mt-2">
                 <div class="card-body mt-3 mb-3 mr-2 ml-4">
                     Don't have an account?
-                        {% comment %} <a href="{% url 'register' %}">  {% endcomment %}
+                        <a href="/accounts/register/"> 
                             Sign up </a>
                 </div>
             </div>
